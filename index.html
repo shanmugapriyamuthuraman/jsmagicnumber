@@ -4,12 +4,99 @@
 	<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+			#main{
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between;
+			}
+			.num_box{
+				position: relative;
+				width: 23%;
+				height: 150px;
+				text-align: center;
+				border: 1px solid blueviolet;
+				line-height: 150px;
+				margin-bottom: 30px;
+			}
+			.num_box::after{
+				content: "";
+				position: absolute;
+				left: 0;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				background-color: brown;
+			}
+			.num_box::after{
+				content: "";
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				background-color: aqua;
+			}
+			.num_box.activeBox::after{
+				background-color: transparent;
+			}
+			.num_box.successbox{
+				background-color: yellowgreen;
+				color:white;
+			}
+			.successbox::after{
+				background-color: transparent;
+			}
+			.body{
+				text-align: center;
+			}
+		</style>
 </head>
 <body>
 
-	<p> priya is strong girl she is journalist</p>
+	<p id="para"></p>
+	<button onClick="generateNmuber()">Magic Number</button>
+	<div id="main">
+	</div>
+	
 	<script>
-		
+		let paragraph=document.getElementById("para");
+		let box=document.getElementById("main");
+		function magicNumber(){
+			let num=Math.trunc(Math.random()*20);
+			return num;
+		}
+		function generateNmuber(){
+			let n=magicNumber();
+			paragraph.innerHTML=n;
+		}
+		function listBox(){
+			let uniqueNumber=[];
+			
+			while(uniqueNumber){
+				let setNumber=magicNumber();
+				let unique=uniqueNumber.includes(setNumber)
+			
+				if(!unique){
+					uniqueNumber.push(setNumber)
+				}
+				}
+				uniqueNumber.forEach(function(element,index){
+					let numBox=document.createElement("div");
+					numBox.setAttribute("class","num-box");
+					numBox.setAttribute("data-target",element);
+					numBox.innerText=element;
+					box.appendChild(numBox);
+					let elem=document.getElementByClassName("num-box");
+					for(let i=0;i<elem.length;i++){
+						element[i].addEventListener("click",findNumbers);
+					}
+				})
+		}
+		function findNumbers(event){
+			let _id=event.target.dataset.target;
+		}
+	
 	</script>
 </body>
 </html>
